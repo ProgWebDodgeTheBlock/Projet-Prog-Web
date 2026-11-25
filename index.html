@@ -36,28 +36,25 @@
 
             <!-- zone de gestion des paramètres de jeu (difficulté, changer de joueur..) -->
             <article id="zone-paramètres">
-                <!-- section du bouton de difficulté (Ancienne version de Valentin en conmmentaire)-->
-                <!--
-                <section id="zone-bouton-difficulté">
-                    <button id="bouton-difficulté-moins">-</button>
-                    <p id="texte-difficulté" class="texte-centré">Difficulté</p>
-                    <button id="bouton-difficulté-plus">+</button>
-                    <p id="Valeur-difficultee" class="texte-centré">Facile</p>
-                    <p id="Valeur-difficultee" class="texte-centré">Moyen</p>
-                    <p id="Valeur-difficultee" class="texte-centré">Difficile</p>
-                </section>
-                -->
-                <form>
+                <!-- Form pour choisir la difficulté -->
+                <form id="form-difficulte" action="script.js" method="post">
+                    <p>Choisir la difficulté :</p>
                     <input type="radio" id="facile" name="difficulte" value="Facile">
                     <label for="facile">Facile</label>
                     <input type="radio" id="moyen" name="difficulte" value="Moyen">
                     <label for="facile">Moyen</label>
                     <input type="radio" id="difficile" name="difficulte" value="Difficile">
                     <label for="facile">Difficile</label><br>
-                    <button value="Update">Difficulté</button> <!--Changer "update"-->
+                    <button value="Update">Valider le changement de difficulté</button>
                 </form>
 
-                <button id="bouton-changer-joueur">Changer de joueur</button>
+                <!-- Form pour changer de joueur -->
+                <form id="form-pseudo" action="script.js" method="post">
+                    <label for="pseudo">Changer joueur :</label>
+                    <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
+                    <button type="submit">Ajouter</button>
+                </form>
+
             </article>
         </section>
 
