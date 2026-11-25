@@ -10,17 +10,6 @@ main {
     gap: 20px;
 }
 
-section {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-article {
-    display: flex;
-    flex-direction: row;
-}
-
 .texte-centré {
     text-align: center;
 }
@@ -29,6 +18,17 @@ article {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
+}
+
+#canvas-jeu {
+    background-color: #686868;
+}
+
+#bouton-start {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #zone-jeu {
@@ -45,9 +45,10 @@ article {
     gap: 10px;
 }
 
-.explication-touches {
-    display: grid;
-    grid-template-columns: 1fr 1fr 4fr;
+.explication-controles {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .description-image {
@@ -64,7 +65,8 @@ article {
     gap: 10px;
 }
 
-#zone-milieu-bas {
+#info {
+    display: grid;
     grid-template-columns: 1fr 1fr;
 }
 

@@ -8,7 +8,7 @@
     <title>Dodge The Blocks</title>
     
     <!-- Feuille de styles CSS : Enlever commentaire autour après avoir fini Html -->
-    <!-- <link rel="stylesheet" href="style.css">  --> 
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
@@ -28,11 +28,11 @@
             <!-- La zone de jeu -->
             <!-- Choix d'un canvas pour pouvoir dessiner les formes plus facilement -->
             
-            <canvas id="zone-jeu">
+            <div id="zone-jeu">
                 <!-- <button id="bouton-start">Start</button> -->
-                <input type="image" src="Images/start_placeholder.png" width="256px">
-            </canvas>
-            
+                <canvas id="canvas-jeu" width="800px" height="600px"></canvas>
+                <input id="bouton-start" type="image" src="Images/start_placeholder.png" width="256px">
+            </div>
 
             <!-- zone de gestion des paramètres de jeu (difficulté, changer de joueur..) -->
             <article id="zone-paramètres">
@@ -69,19 +69,28 @@
                     <!--Touches directionnelles -->
                     <img src="Images/touches directionnelles clavier.jpg" alt="Touches directionnelles clavier" width="100">
                     <p class="description-image">Vous pouvez vous déplacer à l'aides des touches directionnelles</p>
+                </article>
+                <article class="explication-controles">
                     <!-- Sauter -->
                     <img src="Images/touche_espace.jpg" alt="Touche Espace" width="100">
                     <p>Utiliser la touche ESPACE pour SAUTER</p><br>
+                </article>
+                <article class="explication-controles">
                     <!-- Dasher -->
-                    <img src="Images/touches maj.jpg" alt="Touche de Dash" width="100">
+                    <img src="Images/touche maj.png" alt="Touche de Dash" width="100">
                     <p>Utiliser la touche MAJ pour DASH</p><br>
+                </article>
+                <article class="explication-controles">
                     <!-- Ennemis -->
                     <img src="Images/ennemis.jpg" alt="Image Ennemis" width="100">
                     <p>A ne pas toucher !</p><br>
+                </article>
+                <article class="explication-controles">
                     <!-- Pièce -->
                     <img src="Images/bonus.jpg" alt="Image Bonus" width="100">
                     <p>Donne des points et recharge 1 Dash</p><br>
                 </article>
+                
             </article>
 
 
