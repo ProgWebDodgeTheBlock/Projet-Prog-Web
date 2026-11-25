@@ -27,6 +27,7 @@ section {
 #zone-jeu {
     width: 900px;
     height: 600px;
+    display: grid;
 }
 
 
@@ -51,8 +52,9 @@ section {
 
 #zone-bouton-difficulté {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    gap: 10px;
 }
 
 #zone-milieu-bas {
