@@ -1,3 +1,15 @@
+class Jeu {
+    constructor() {
+        this.difficulté = "Facile";
+    }
+    modifier_difficulté(difficulté) {
+        this.difficulté = difficulté;
+    }
+    recupererDifficulté() {
+        return this.difficulté;
+    }
+}
+
 class Joueur {
     constructor(pseudo) {
         this.pseudo = pseudo;
@@ -10,10 +22,78 @@ class Joueur {
     }
 }
 
-function reordonnerClassement() {
-    // Fonction réorganisant la table de classement en fonction du score des joueurs
-    // À compléter
+function max(a,b) {
+    if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
 }
+
+
+function Interclassement(tableau1, tableau2) {
+    let tab_classé = [];
+
+    while (tableau1.length > 0 || tableau2.length > 0) {
+
+        if (tableau1.length > 0 && tableau2.length > 0) {
+
+            // Le score est la 3ème cellule d'une table
+            if (Number(tableau1[0].cells[2].textContent) > Number(tableau2[0].cells[2].textContent)) {
+                tab_classé.push(tableau1.shift());
+            }
+            else {
+                tab_classé.push(tableau2.shift());
+            }
+
+        }
+        else if (tableau1.length > 0) {
+            tab_classé.push(tableau1.shift());
+        }
+        else {
+            tab_classé.push(tableau2.shift());
+        }
+    }
+
+    return tab_classé;
+}
+
+// Comme en Algo :)
+function TriFusionPourClassement(lignes) {
+
+    const taille_tableau = lignes.length;
+
+    if (taille_tableau <= 1) {
+        return lignes;
+    }
+
+    // Partie Diviser
+
+    const milieu = Math.floor(taille_tableau / 2);
+
+    const tableau1 = TriFusionPourClassement(lignes.slice(0, milieu));
+    const tableau2 = TriFusionPourClassement(lignes.slice(milieu));
+
+    // Partie Régner
+
+    return Interclassement(tableau1, tableau2);
+}
+
+
+function reordonnerClassement() {
+
+    const table = document.querySelector("#table-classement tbody");
+
+    const lignes = Array.from(table.querySelectorAll("tr"));
+
+    const lignes_triées = TriFusionPourClassement(lignes);
+
+    for (let i = 0; i < lignes_triées.length; i++) {
+        table.appendChild(lignes_triées[i]);
+    }
+}
+
 
 class Tentative {
     constructor(Joueur, temps, score) {
@@ -23,7 +103,7 @@ class Tentative {
     }
     ajouter() {
         // Ajout d'une nouvelle ligne de tentative dans la table de classement
-        const tableTentatives = document.getElementById("table-classement");
+        const tableTentatives = document.querySelector("#table-classement tbody");
         const nouvelleLigne = document.createElement("tr");
         const colonnePseudo = document.createElement("td");
         const colonneNumTentative = document.createElement("td");
@@ -51,9 +131,10 @@ class Tentative {
 
 
 
-// Gestion du bouton de démarrage du jeu
-const boutonStart = document.getElementById("bouton-start");
+// Gestion des boutons
+const boutonStart = document.querySelector("#bouton-start");
 const eventType = "click";
+const formDifficulté = document.querySelector("#form-difficulte");
 
 // Fonction appelée quand on clique sur le bouton de démarrage
 function startGame() {
@@ -63,7 +144,21 @@ function startGame() {
     boutonStart.style.display = "none"; // On cache le bouton de démarrage
 }
 
-// On ajoute l'EventListener pour le bouton de démarrage
+// Fonction appelée quand on change le niveau de difficulté
+function changerDifficulté(jeu, formulaire) {
+    // Récupère les données du formulaire
+    const formData = new FormData(formulaire);
+
+    // Récupère la difficulté choisie
+    const difficulte = String(formData.get("difficulte"));
+    jeu.modifier_difficulté(difficulte);
+    console.log(String(jeu.recupererDifficulté()));
+}
+
+let jeu = new Jeu;
+
+// Eventlisteners
+formDifficulté.addEventListener("submit", changerDifficulté(jeu, formDifficulté));
 boutonStart.addEventListener(eventType, startGame);
 
 const joueurTest = new Joueur("Test");
