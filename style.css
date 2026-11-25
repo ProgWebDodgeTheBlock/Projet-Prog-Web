@@ -1,0 +1,56 @@
+main {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section {
+    display: grid;
+}
+
+.texte-centré {
+    text-align: center;
+}
+
+#zone-milieu-haut {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+#zone-jeu {
+    width: 900px;
+    height: 600px;
+}
+
+
+#zone-paramètres {
+    gap: 10px;
+}
+
+.explication-touches {
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr;
+}
+
+.description-image {
+    height: auto;
+    width: auto;
+    text-align: center;
+    
+}
+
+#zone-bouton-difficulté {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+#zone-milieu-bas {
+    grid-template-columns: 1fr 1fr;
+}
+
+#zone-contrôles {
+    grid-template-rows: 1fr;
+}
