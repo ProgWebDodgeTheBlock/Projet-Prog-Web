@@ -10,6 +10,9 @@ class Jeu {
     }
 }
 
+// On crée un nouveau Jeu GLOBAL
+let jeu = new Jeu;
+
 class Joueur {
     constructor(pseudo) {
         this.pseudo = pseudo;
@@ -145,20 +148,22 @@ function startGame() {
 }
 
 // Fonction appelée quand on change le niveau de difficulté
-function changerDifficulté(jeu, formulaire) {
-    // Récupère les données du formulaire
-    const formData = new FormData(formulaire);
+function changerDifficulté(event) {
+    event.preventDefault();
+    
+    // On récupère le champ du form de difficulté qui a été sélectionné
+    const réponseFormulaire = document.querySelector('#form-difficulte input[name="difficulte"]:checked');
+    const difficulté = réponseFormulaire.value;
 
-    // Récupère la difficulté choisie
-    const difficulte = String(formData.get("difficulte"));
-    jeu.modifier_difficulté(difficulte);
-    console.log(String(jeu.recupererDifficulté()));
+    // Et on modifie la difficulté du jeu
+    jeu.modifier_difficulté(difficulté);
+    console.log(jeu.recupererDifficulté());
+
 }
 
-let jeu = new Jeu;
-
 // Eventlisteners
-formDifficulté.addEventListener("submit", changerDifficulté(jeu, formDifficulté));
+formDifficulté.addEventListener("submit", changerDifficulté);
+
 boutonStart.addEventListener(eventType, startGame);
 
 const joueurTest = new Joueur("Test");
