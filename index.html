@@ -15,7 +15,17 @@
     <header>
         <h1 class="texte-centré">Dodge The Blocks</h1>
     </header>
-    
+
+    <!-- ACCUEIL DU JOUEUR ET DEMANDE DE SON PSEUDO -->
+    <div id="accueil-joueur">
+        <form id="form-nouveau-joueur" action="script.js" method="post">
+            <label for="pseudo">Veuillez rentrez votre pseudo :</label>
+            <input type="text" name="pseudo" placeholder="ex: Xx_Destructeur_de_Mondes_xX" required>
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+
+    <!-- MAIN INITIALEMENT CACHÉ À L'UTILISATEUR -->
     <main>
         <!-- zone du milieu haut -->
         <section id="zone-milieu-haut">
@@ -49,9 +59,9 @@
                 </form>
 
                 <!-- Form pour changer de joueur -->
-                <form id="form-pseudo" action="script.js" method="post">
+                <form id="form-changer-joueur" action="script.js" method="post">
                     <label for="pseudo">Changer joueur :</label>
-                    <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
+                    <input type="text" name="pseudo" placeholder="Entrez votre pseudo" required>
                     <button type="submit">Ajouter</button>
                 </form>
 

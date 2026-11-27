@@ -1,6 +1,23 @@
+
+class Joueur {
+    constructor(pseudo) {
+        this.pseudo = pseudo;
+        this.nombreTentatives = 0;
+    }
+    recupererPseudo() {
+        return this.pseudo;
+    }
+    // Fonction s'utilisant pour mettre à jour le nombre de tentatives du joueur et récupérer le numéro de la prochaine tentative
+    recupererProchaineTentative() {
+        this.nombreTentatives++;
+        return this.nombreTentatives;
+    }
+}
+
 class Jeu {
-    constructor() {
+    constructor(joueurActuel) {
         this.difficulté = "Facile";
+        this.pseudoJoueurActuel = null;
     }
     modifier_difficulté(difficulté) {
         this.difficulté = difficulté;
@@ -8,20 +25,11 @@ class Jeu {
     recupererDifficulté() {
         return this.difficulté;
     }
-}
-
-// On crée un nouveau Jeu GLOBAL
-let jeu = new Jeu;
-
-class Joueur {
-    constructor(pseudo) {
-        this.pseudo = pseudo;
-        this.nombreTentatives = 0;
+    modifierJoueurActuel(pseudoJoueur) {
+        this.pseudoJoueurActuel = pseudoJoueur;
     }
-    // Fonction s'utilisant pour mettre à jour le nombre de tentatives du joueur et récupérer le numéro de la prochaine tentative
-    recupererProchaineTentative() {
-        this.nombreTentatives++;
-        return this.nombreTentatives;
+    recupererPseudoJoueurActuel() {
+        return this.pseudoJoueurActuel;
     }
 }
 
@@ -132,7 +140,43 @@ class Tentative {
     }
 }
 
+// -------------------------------------------------------------------------------------------------------------------------
+// DÉBUT EXÉCUTION SCRIPT
+// -------------------------------------------------------------------------------------------------------------------------
 
+// PARTIE ACCUEIL DU JOUEUR ET PRISE DE SON PSEUDO
+// On cache la partie main jusqu'à qu'il ait rentré son pseudo
+const main = document.querySelector('main');
+main.style.display = 'none';
+
+// On crée un nouveau Jeu GLOBAL
+let jeu = new Jeu;
+
+function nommerJoueur(event) {
+    // Pour éviter que la page se recharge automatiquement
+    event.preventDefault();
+    
+    // On récupère le formulaire
+    const réponseFormulaire = document.querySelector('#accueil-joueur form input');
+    const pseudoJoueur = réponseFormulaire.value;
+
+    // On actualise dans l'objet global jeu
+    jeu.modifierJoueurActuel(pseudoJoueur);
+
+    // Maintenant on ajoute un texte de bienvenue qui appelle le joueur par son pseudo
+    const nouveauTexteBienvenue = document.createElement('p');
+    nouveauTexteBienvenue.textContent = `Hey ${jeu.recupererPseudoJoueurActuel()} ! `; // Je fais un récupérerPseudo pour débugger
+    const articleDescriptionJeu = document.querySelector('#zone-description');
+    articleDescriptionJeu.prepend(nouveauTexteBienvenue); // prepend permet d'ajouter cette balise p au début de l'article
+
+    // Maintenant on peut afficher le VRAI JEU
+    const divAccueil = document.querySelector('#accueil-joueur');
+    divAccueil.remove(); // On supprime la section d'accueil qui ne sert plus à rien
+    main.style.display = 'grid'; // On rétablit le style de main
+}
+
+const formAccueilJoueur = document.querySelector('#accueil-joueur form');
+formAccueilJoueur.addEventListener("submit", nommerJoueur);
 
 // Gestion des boutons
 const boutonStart = document.querySelector("#bouton-start");
@@ -149,6 +193,7 @@ function startGame() {
 
 // Fonction appelée quand on change le niveau de difficulté
 function changerDifficulté(event) {
+    // Pour éviter que la page se recharge automatiquement
     event.preventDefault();
     
     // On récupère le champ du form de difficulté qui a été sélectionné
@@ -161,7 +206,7 @@ function changerDifficulté(event) {
 
 }
 
-// Eventlisteners
+// Eventlistener du form de difficulté
 formDifficulté.addEventListener("submit", changerDifficulté);
 
 boutonStart.addEventListener(eventType, startGame);
